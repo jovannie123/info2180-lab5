@@ -1,56 +1,46 @@
-window.addEventListener("load", (event) =>{
+window.addEventListener('load', (event) =>{
 
-    const countryLookup = document.querySelector("#countryLookup")
+    const lookcountry = document.getElementById("countryLookup")
     const lookupCity = document.querySelector("#cityLookup")
-    const input = document.querySelector("#country")
-    const result = document.querySelector("#result")
+    const inputv = document.querySelector("#country")
+    const resulti = document.querySelector("#result")
 
 
-    countryLookup.addEventListener("click", (e) =>{
+    lookcountry.addEventListener("click", (e) => {
         e.preventDefault()
 
-        let newInput = input.value
-        newInput.trim()
+        let userInput = inputv.value
+        userInput.trim()
 
-        let url = 'world.php?country=${newInput}&lookup=country'
+        let url = `world.php?country=${userInput}&lookup=country`
 
         fetch(url)
         .then(response => {
-            if(response.ok){
-                return response.text()
-            }
-            else{
-                return Promise.reject('Something went wrong when fetching!!!!')
-            }
+            if(response.ok){return response.text()}
+            else{return Promise.reject('Something was wrong with fetch request!')}
         })
-        .then(data =>{
-            alert(data)
-            result.innerHTML = data
+        .then(data => {
+            resulti.innerHTML = data
         })
-
-        .catch(error => console.log('WE HAVE AN ERROR!!!! ${error}'))
+        .catch(error => console.log(`ERROR HAS OCCURRED: ${error}`))
     })
 
-    lookupCity.addEventListener("click", (e) =>{
+    lookupCity.addEventListener("click", (e) => {
         e.preventDefault()
-        let newInput = input.value
-        newInput.trim()
-        let url = 'world.php?city=${newInput}&lookup=city'
+
+        let userInput = inputv.value;
+        userInput.trim()
+
+        let url = `world.php?country=${userInput}&lookup=city`
 
         fetch(url)
         .then(response => {
-            if(response.ok){
-                return response.text()
-            }
-            else{
-                return Promise.reject('Something went wrong when fetching!!!!')
-            }
+            if(response.ok){return response.text()}
+            else{return Promise.reject('Something was wrong with fetch request!')}
         })
-        .then(data =>{
-            alert(data)
-            result.innerHTML = data
+        .then(data => {
+            resulti.innerHTML = data
         })
-
-        .catch(error => console.log('WE HAVE AN ERROR!!!! ${error}'))
+        .catch(error => console.log(`ERROR HAS OCCURRED: ${error}`))
     })
 })
